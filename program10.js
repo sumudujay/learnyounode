@@ -1,8 +1,21 @@
 var net = require('net');
 
-var server = net.createServer(function (socket) {
-  var date = new Date(year, month, day, hours, minutes, seconds, milliseconds)
-  socket.write("")
+//var server = net.createServer(function (socket) {
+//  var date = new Date();
+//  
+//  socket.write("")
+//}
+//
+//server.listen(process.argv[2]);
+
+function makeTwoDigits(value) {
+  var valueStr = value.toString();
+  
+  if (value.search(/\d/i) == -1) { return value; }
+  else {return "0" + value; }
 }
 
-server.listen(process.argv[2]);
+
+var date = new Date();
+
+console.log(makeTwoDigits(date.getDate()));
