@@ -1,21 +1,18 @@
 var net = require('net');
 
-//var server = net.createServer(function (socket) {
-//  var date = new Date();
-//  
-//  socket.write("")
-//}
-//
-//server.listen(process.argv[2]);
-
-function makeTwoDigits(value) {
+function dd(value) {
   var valueStr = value.toString();
-  
-  if (value.search(/\d/i) == -1) { return value; }
-  else {return "0" + value; }
+
+  if (valueStr.search(/^\d$/i) == -1) { return value; }
+  else {return "0" + valueStr; }
 }
 
 
-var date = new Date();
+var server = net.createServer(function (socket) {
+ var date = new Date();
 
-console.log(makeTwoDigits(date.getDate()));
+ socket.end(date.getFullYear() + "-" + dd(date.getMonth()+1) + "-" +
+   dd(date.getDate()) + " " + dd(date.getHours()) + ":" + dd(date.getMinutes()) + "\n");
+});
+
+server.listen(Number(process.argv[2]));
